@@ -27,31 +27,24 @@ void find_last_name(map<string, string> &myMap, string phone_number)
 
 void find_phone_number(map<string, string> &myMap, string last_name)
 {
-    //map<int, vector<string>> counter;
     cout << "Input last name: ";
     cin >> last_name;
-    map<string, string>::iterator it_lName = myMap.find(last_name);
 
-/*   for (auto& it : myMap)
+    string target = last_name;
+    vector<string> counter;
+
+    for (auto it = myMap.begin(); it != myMap.end(); it++)
     {
-      counter[it.second.size()].emplace_back(it.first);
+        if (it->second == target)
+        {
+            counter.push_back(it->first);
+        }
     }
 
-  for (auto& it : counter)
+    for (const auto &counter: counter)
     {
-      if (it.second.size() <= 1) continue;
-
-      cout << "Phone number: ";
-      for (auto& k:it.second)
-        {
-          if (&k != &it.second.front()) cout << " ";
-          cout << k;
-        }
-    } */
-
-    if (it_lName != myMap.end())
-    {
-        cout << "Phone number: " << it_lName->first << endl;
+        cout << "Phone number: ";
+        cout << counter << " ";
     }
 }
 
@@ -62,7 +55,7 @@ int main()
     string last_name;
     string command;
 
-    cout << "Input command (add, Lname, phone): ";
+    cout << "Input command (add, name, phone): ";
     cin >> command;
 
     while (command != "exit")
@@ -70,36 +63,25 @@ int main()
         if (command == "add")
         {
             insert_in_map(phone_book, phone_number, last_name);
-            cout << endl << "Input command (add, Lname, phone or exit): ";
+            cout << endl << "Input command (add, name, phone or exit): ";
             cin >> command;
         }
-        else if (command == "Lname")
+        else if (command == "name")
         {
             find_last_name(phone_book, phone_number);
-            cout << endl << "Input command (add, Lname, phone): ";
+            cout << endl << "Input command (add, name, phone): ";
             cin >> command;
         }
         else if (command == "phone")
         {
             find_phone_number(phone_book, last_name);
-            cout << endl << "Input command (add, Lname, phone): ";
+            cout << endl << "Input command (add, name, phone): ";
             cin >> command;
         }
-/*       else if (command == "show")
-      {
-        for (map<string, string>::iterator it = phone_book.begin();
-            it != phone_book.end(); ++ it)
-          {
-            cout << it->first << " " << it->second << endl;
-          }
-
-        cout << endl << "Input command (add, lname, phone): ";
-        cin >> command;
-      } */
         else
         {
             cerr << "Uknown command";
-            cout << endl << "Input command (add, Lname, phone): ";
+            cout << endl << "Input command (add, name, phone): ";
             cin >> command;
         }
     }
